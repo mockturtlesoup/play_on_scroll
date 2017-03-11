@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .silent {background-color: #f1f1f1; padding: 40em 10em}
+      .neigh { background-image: url("https://static.pexels.com/photos/6468/animal-brown-horse.jpg");background-size: cover; padding:20em;}
+
+      html {
+        box-sizing: border-box;
+        font-family:'helvetica neue';
+        font-size: 20px;
+        font-weight: 200;
+      }
+      body {
+        margin: 0;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Neigh on Scroll</h1>
+    <audio src="music/Horse-neigh.mp3"></audio>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+    <div class="silent"></div>
+    <div class="neigh"></div>
+
+    <script type="text/javascript">
+
+
+    const horses = document.querySelectorAll('.neigh');
+    console.log(horses);
+
+
+    function neigh(e) {
+      horses.forEach(horse => {
+        const neighAt = (window.scrollY + window.innerHeight) - horse.offsetHeight / 2;
+        const isHalfShown = neighAt > horse.offsetTop;
+
+        const horseBottom = horse.offsetTop + horse.offsetHeight;
+        const isNotScrolledPast = window.scrollY < horseBottom;
+
+        const audio = document.querySelector(`audio`);
+
+        if (isHalfShown && isNotScrolledPast) {
+          console.log('neeeigh');
+          audio.volume = 1.0;
+          audio.play();
+        } else {
+          console.log('silent');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', neigh);
+
+    </script>
+
+  </body>
+</html>
